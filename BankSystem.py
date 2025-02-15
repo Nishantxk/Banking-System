@@ -1,0 +1,61 @@
+class Bank:
+    def __init__(self, balance, name):  # Fixed constructor
+        self.balance = balance
+        self.name = name
+
+    def withdraw(self, amount):
+        if self.balance >= amount:
+            self.balance -= amount
+            print(f"Withdrawal successful! {self.name}, your remaining balance is: {self.balance}")
+        else:
+            print("Insufficient balance.")
+
+    def deposit(self, amount):
+        self.balance += amount
+        print(f"Deposit successful! New balance: {self.balance}")
+
+    def check_balance(self):
+        print(f"Your current balance is: {self.balance}")
+
+# Sample Data
+account_numbers = [111111, 222222, 333333, 444444]
+pins = [1234, 4321, 1104, 1828]
+names = ["Sukuu", "Avinash", "Avira", "Saransh"]
+balances = [5000, 4000, 6000, 7000]
+
+# User Authentication
+account_no = int(input("Enter your account number: "))
+
+if account_no in account_numbers:
+    index = account_numbers.index(account_no)  # Get index of account number
+    pin = int(input("Enter your PIN: "))  # PIN should only be asked after a valid account number
+
+    if pin == pins[index]:  # Match PIN at the same index
+        name = names[index]
+        balance = balances[index]
+        obj = Bank(balance, name)  # Fixed incorrect parameter
+
+        print(f"Hello {name}!")
+
+        while True:
+            print("\nWhat do you want to do?")
+            print("1. Withdraw\n2. Deposit\n3. Check Balance\n4. Exit")
+            choose = int(input("Choose (1, 2, 3, or 4): "))
+
+            if choose == 1:
+                amount = int(input("Enter the amount to withdraw: "))
+                obj.withdraw(amount)
+            elif choose == 2:
+                amount = int(input("Enter the amount to deposit: "))
+                obj.deposit(amount)
+            elif choose == 3:
+                obj.check_balance()
+            elif choose == 4:
+                print("Thank you for banking with us!")
+                break
+            else:
+                print("Invalid choice. Please try again.")
+    else:
+        print("Invalid PIN.")  # Fixed indentation and logic
+else:
+    print("Invalid Account Number.")  # Fixed indentation and logic
